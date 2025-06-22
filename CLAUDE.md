@@ -21,9 +21,21 @@ This is a poker chip calculator and tournament timer application built with Next
 
 ## Architecture
 
-### Core Component Structure
-- **Main component**: `poker-chip-calculator.tsx` - Single comprehensive React component containing all functionality
-- **UI components**: Located in `components/ui/` - shadcn/ui components for consistent styling
+### Modular Component Structure (Refactored)
+- **Main component**: `poker-chip-calculator.tsx` - Orchestrates the application by composing smaller components and hooks
+- **UI components**: 
+  - `components/ui/` - shadcn/ui components for consistent styling
+  - `components/timer-display.tsx` - Timer UI with manual/automatic modes
+  - `components/settings-dialog.tsx` - Tournament configuration management
+  - `components/player-tabs.tsx` - Player stack management and chip input
+  - `components/stack-comparison.tsx` - Player comparison display
+- **Custom hooks**:
+  - `hooks/use-timer.ts` - Timer functionality, auto-advance, sound alerts
+  - `hooks/use-players.ts` - Player state management, chip calculations
+- **Utility modules**:
+  - `lib/types.ts` - TypeScript interfaces and types
+  - `lib/tournament-configs.ts` - Default tournament configurations
+  - `lib/poker-utils.ts` - Utility functions for calculations and formatting
 - **Page integration**: `app/page.tsx` imports and renders the main component
 
 ### Key Features
@@ -34,9 +46,10 @@ This is a poker chip calculator and tournament timer application built with Next
 - **Configuration Presets**: Built-in chip color schemes for different poker formats (Standard, WSOP, Cash Game, etc.)
 
 ### State Management
-- Uses React hooks (useState, useEffect, useRef) for local state management
-- Complex state objects for tournament configuration, timer state, and player stacks
-- Real-time calculations for chip totals and big blind ratios
+- **Custom hooks**: `useTimer` and `usePlayers` encapsulate complex state logic
+- **Local state**: Tournament configuration and UI state managed in main component
+- **Real-time calculations**: Chip totals and big blind ratios calculated automatically
+- **Separation of concerns**: Timer logic, player management, and UI rendering are separated
 
 ### Data Structures
 - `TournamentConfig`: Contains chip configurations and blind structure
